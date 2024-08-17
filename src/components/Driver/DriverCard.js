@@ -1,4 +1,6 @@
+import { MoreOutlined } from "@ant-design/icons";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const DriverCard = (props) => {
   const { driver } = props;
@@ -24,19 +26,26 @@ const DriverCard = (props) => {
         key={driver.login.uuid}
         className="bg-white p-4 border border-gray-200 rounded-lg shadow-sm min-h-full"
       >
-        <div className="space-x-2 py-2">
-          <span className="text-gray-500 text-md">Driver ID</span>
-          <span className="text-red-500 text-md font-bold truncate">
-            {driver.login.uuid.substring(0, 8).toUpperCase()}
-          </span>
+        <div className="py-2">
+          <div className="flex justify-between">
+            <div className="space-x-2">
+              <span className="text-gray-500 text-md">Driver ID</span>
+              <span className="text-red-500 text-md font-bold truncate">
+                {driver.login.uuid.substring(0, 8).toUpperCase()}
+              </span>
+            </div>
+            <MoreOutlined className="items-end" />
+          </div>
+
           <Divider />
         </div>
         <div className="flex items-center mb-4">
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-            <img
+            <LazyLoadImage
               src={driver.picture.thumbnail}
-              loading="lazy"
-              alt="Driver"
+              width={600}
+              height={400}
+              alt="Image Alt"
               className="rounded-full w-full h-full object-cover min-w-4 min-h-4"
             />
           </div>

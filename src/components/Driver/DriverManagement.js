@@ -15,21 +15,24 @@ const DriverManagement = () => {
 
   // Fetch drivers if not in localStorage
   useEffect(() => {
-    if (drivers.length === 0) {
-      const fetchDrivers = async () => {
-        try {
+    const fetchDrivers = async () => {
+      try {
+        const storedDrivers = getLocalStorage("drivers");
+        if (storedDrivers && storedDrivers.length > 0) {
+          setDrivers(storedDrivers);
+        } else {
           const { data } = await axios.get(
             "https://randomuser.me/api/?results=30"
           );
           setDrivers(data.results);
           setLocalStorage("drivers", data.results);
-        } catch (error) {
-          console.error("Error fetching drivers:", error);
         }
-      };
-      fetchDrivers();
-    }
-  }, [drivers]);
+      } catch (error) {
+        console.error("Error fetching drivers:", error);
+      }
+    };
+    fetchDrivers();
+  }, []);
 
   // Reset to first page when search term changes
   useEffect(() => {
