@@ -4,8 +4,7 @@ import Pagination from "../Pagination";
 import { getLocalStorage, setLocalStorage } from "../../utils/localstorage";
 import Search from "../Search";
 import { PlusOutlined } from "@ant-design/icons";
-
-const DriverCard = lazy(() => import("./DriverCard"));
+import DriverCard from "./DriverCard";
 
 const DriverManagement = () => {
   const [drivers, setDrivers] = useState(getLocalStorage("drivers") || []);
@@ -13,25 +12,22 @@ const DriverManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const driversPerPage = 5;
 
-  // Fetch drivers if not in localStorage
   useEffect(() => {
-    const fetchDrivers = async () => {
-      try {
-        const storedDrivers = getLocalStorage("drivers");
-        if (storedDrivers && storedDrivers.length > 0) {
-          setDrivers(storedDrivers);
-        } else {
+    const storedDrivers = getLocalStorage("drivers");
+    if (!storedDrivers || storedDrivers.length === 0) {
+      const fetchDrivers = async () => {
+        try {
           const { data } = await axios.get(
             "https://randomuser.me/api/?results=30"
           );
           setDrivers(data.results);
           setLocalStorage("drivers", data.results);
+        } catch (error) {
+          console.error("Error fetching drivers:", error);
         }
-      } catch (error) {
-        console.error("Error fetching drivers:", error);
-      }
-    };
-    fetchDrivers();
+      };
+      fetchDrivers();
+    }
   }, []);
 
   // Reset to first page when search term changes
@@ -40,7 +36,7 @@ const DriverManagement = () => {
   }, [searchTerm]);
 
   // Filter drivers based on search term
-  const filteredDrivers = (drivers || []).filter((driver) =>
+  const filteredDrivers = drivers.filter((driver) =>
     `${driver.name.first} ${driver.name.last}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
@@ -90,6 +86,7 @@ const DriverManagement = () => {
       </div>
 
       {currentDrivers.length === 0 && "No data available."}
+
       <div className="flex overflow-x-auto space-x-2 md:space-x-10 py-4">
         <Suspense fallback={<div>Loading...</div>}>
           {currentDrivers.map((driver) => (
