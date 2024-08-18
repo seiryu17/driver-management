@@ -21,7 +21,7 @@ const DriverCard = (props) => {
   );
 
   return (
-    <div className="flex-none w-1/2 md:w-1/4 h-96 min-h-full">
+    <div className="flex-none w-1/2 lg:w-1/3 xl:w-1/4 h-96 min-h-full">
       <div
         key={driver.login.uuid}
         className="bg-white p-4 border border-gray-200 rounded-lg shadow-sm min-h-full"
