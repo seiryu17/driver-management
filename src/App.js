@@ -1,13 +1,20 @@
 import React from "react";
-import "./style.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import DriverManagement from "./components/Driver/DriverManagement";
+import DriverManagement from "./pages/DriverManagement";
+import Homepage from "./pages/Homepage";
+import "./style.css";
 
 const App = () => {
   return (
-    <Layout>
-      <DriverManagement />
-    </Layout>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/drivers" element={<DriverManagement />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 };
 

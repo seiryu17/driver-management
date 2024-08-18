@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect, lazy, Suspense } from "react";
-import Pagination from "../Pagination";
-import { getLocalStorage, setLocalStorage } from "../../utils/localstorage";
-import Search from "../Search";
+import React, { useState, useEffect, Suspense } from "react";
+import Pagination from "../components/Pagination";
+import { getLocalStorage, setLocalStorage } from "../utils/localstorage";
+import Search from "../components/Search";
 import { PlusOutlined } from "@ant-design/icons";
-import DriverCard from "./DriverCard";
+import DriverCard from "../components/Driver/DriverCard";
 
 const DriverManagement = () => {
   const [drivers, setDrivers] = useState(getLocalStorage("drivers") || []);
