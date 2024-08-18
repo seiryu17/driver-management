@@ -31,10 +31,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className="py-3 text-lg">
-          <NavLink
-            to="/pickup"
-            className={({ isActive }) => getLinkClass(isActive)}
-          >
+          <NavLink>
             <CalendarOutlined />
             <span className="ml-4">Pickup</span>
           </NavLink>
