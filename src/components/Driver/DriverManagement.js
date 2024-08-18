@@ -72,7 +72,7 @@ const DriverManagement = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen w-full">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between md:items-center md:mb-6 space-y-2">
         <div>
           <h1 className="text-3xl font-bold text-red-500 mb-0">
             DRIVER MANAGEMENT
@@ -81,16 +81,16 @@ const DriverManagement = () => {
             Data driver yang bekerja dengan Anda.
           </p>
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-col md:flex-row md:items-center space-y-2">
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <button className="ml-4 px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+          <button className="md:ml-4 px-6 py-2 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 w-full">
             TAMBAH DRIVER <PlusOutlined />
           </button>
         </div>
       </div>
 
       {currentDrivers.length === 0 && "No data available."}
-      <div className="flex overflow-x-auto space-x-10 py-4">
+      <div className="flex overflow-x-auto space-x-2 md:space-x-10 py-4">
         <Suspense fallback={<div>Loading...</div>}>
           {currentDrivers.map((driver) => (
             <DriverCard key={driver.login.uuid} driver={driver} />

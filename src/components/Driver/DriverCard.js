@@ -21,7 +21,7 @@ const DriverCard = (props) => {
   );
 
   return (
-    <div className="flex-none w-1/4 h-96 min-h-full">
+    <div className="flex-none w-1/2 md:w-1/4 h-96 min-h-full">
       <div
         key={driver.login.uuid}
         className="bg-white p-4 border border-gray-200 rounded-lg shadow-sm min-h-full"
@@ -30,11 +30,11 @@ const DriverCard = (props) => {
           <div className="flex justify-between">
             <div className="space-x-2">
               <span className="text-gray-500 text-md">Driver ID</span>
-              <span className="text-red-500 text-md font-bold truncate">
+              <span className="text-red-500 text-md font-bold break-all">
                 {driver.login.uuid.substring(0, 8).toUpperCase()}
               </span>
             </div>
-            <MoreOutlined className="items-end" />
+            <MoreOutlined />
           </div>
 
           <Divider />
